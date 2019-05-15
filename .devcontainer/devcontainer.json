@@ -8,5 +8,6 @@
 		"--cap-add=SYS_PTRACE",
 		"--security-opt",
 		"seccomp=unconfined"
-	]
+	],
+	"postCreateCommand": "go mod download"
 }
