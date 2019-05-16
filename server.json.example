@@ -8,9 +8,9 @@
         "Process": []
     },
     "Module": {
-        "Gate": [
+        "MCGate": [
             {
-                "Id": "Gate001",
+                "Id": "MCGate001",
                 "ProcessID": "development",
                 "Settings": {
                     "WSAddr": ":3653",
