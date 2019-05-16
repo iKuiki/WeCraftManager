@@ -1,3 +1,4 @@
+// Package mcgate mc网关模块，负责处理WeCraft插件的连接
 package mcgate
 
 import (
