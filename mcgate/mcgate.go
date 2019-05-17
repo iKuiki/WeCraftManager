@@ -6,10 +6,23 @@ import (
 	"wegate/common"
 )
 
-func (mgt *MCGate) say(session gate.Session, msg map[string]interface{}) (result string, err string) {
+// mc调用传来消息
+func (mgt *MCGate) hdSay(session gate.Session, msg map[string]interface{}) (result string, err string) {
 	user := common.ForceString(msg["user"])
 	content := common.ForceString(msg["content"])
 	log.Info("WeCraft %s say: %s", user, content)
-	session.Send("WeCraft/Say", []byte("got"))
+	text := content
+	if user != "" {
+		text = user + ": " + text
+	}
+	mgt.RpcInvokeNR("WeClient", "McSay", text)
+	return
+}
+
+// 广播到mc
+func (mgt *MCGate) broadcastToMC(text string) (result, err string) {
+	for _, session := range mgt.sessionMap {
+		session.Send("WeCraft/Say", []byte(text))
+	}
 	return
 }

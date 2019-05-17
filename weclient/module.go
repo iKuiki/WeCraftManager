@@ -23,6 +23,7 @@ import (
 // Module 模块实例化
 func Module() module.Module {
 	m := new(WeClient)
+	m.chatroomMap = make(map[string]datastruct.Contact)
 	return m
 }
 
@@ -32,6 +33,8 @@ type WeClient struct {
 	wegateToken  string          // 连接wegate注册后的token
 	mqttClient   commontest.Work // 连接wegate的mqtt客户端
 	starContacts []string
+	chatroomMap  map[string]datastruct.Contact // 群列表（需要维护
+	mcChatrooms  []string                      // 属于mc的群
 }
 
 // GetType 获取模块类型
@@ -87,6 +90,7 @@ func (m *WeClient) OnInit(app module.App, settings *conf.ModuleSettings) {
 	}
 	m.wegateToken = resp.Msg
 	log.Info("获取到token：%s\n", m.wegateToken)
+	m.GetServer().RegisterGO("McSay", m.mcSay)
 }
 
 func (m *WeClient) loginEvent(client MQTT.Client, msg MQTT.Message) {
@@ -98,19 +102,27 @@ func (m *WeClient) loginEvent(client MQTT.Client, msg MQTT.Message) {
 	}
 	if loginStatus.Code == wwdk.LoginStatusGotBatchContact {
 		log.Info("检测到登陆成功开始获取星标联系人")
-	}
-	m.starContacts = []string{} // 清空旧联系人
-	if contacts, err := m.getContacts(); err != nil {
-		log.Error("m.getContacts error: %+v", err)
-	} else {
-		for _, contact := range contacts {
-			if contact.IsStar() {
-				m.starContacts = append(m.starContacts, contact.UserName)
+		m.starContacts = []string{}                         // 清空旧联系人
+		m.chatroomMap = make(map[string]datastruct.Contact) // 重新整理联系人列表
+		if contacts, err := m.getContacts(); err != nil {
+			log.Error("m.getContacts error: %+v", err)
+		} else {
+			for _, contact := range contacts {
+				if contact.IsStar() {
+					m.starContacts = append(m.starContacts, contact.UserName)
+				}
+				if contact.IsChatroom() {
+					m.chatroomMap[contact.UserName] = contact
+				}
 			}
 		}
+		m.starContacts = language.ArrayUnique(m.starContacts).([]string)
+		log.Info("共找到%d位星标联系人与%d个聊天室", len(m.starContacts), len(m.chatroomMap))
+		// 清理旧的mc聊天室
+		m.mcChatrooms = []string{}
+		// 清理完成后通知星标联系人
+		m.broadcastStaredContact("Minecraft聊天室列表已初始化")
 	}
-	m.starContacts = language.ArrayUnique(m.starContacts).([]string)
-	log.Info("共找到%d位星标联系人", len(m.starContacts))
 }
 
 func (m *WeClient) modifyContact(client MQTT.Client, msg MQTT.Message) {
@@ -140,6 +152,10 @@ func (m *WeClient) modifyContact(client MQTT.Client, msg MQTT.Message) {
 			}
 		}
 	}
+	// 如果是群联系人，则记录
+	if contact.IsChatroom() {
+		m.chatroomMap[contact.UserName] = contact
+	}
 }
 
 func (m *WeClient) newMessageEvent(client MQTT.Client, msg MQTT.Message) {
@@ -157,8 +173,29 @@ func (m *WeClient) newMessageEvent(client MQTT.Client, msg MQTT.Message) {
 			memberUserName, _ := message.GetMemberUserName()
 			if language.ArrayIn(m.starContacts, memberUserName) != -1 {
 				log.Info("new chatroom starContact message: %s", content)
+				switch content {
+				case "set mc chatroom":
+					mcChatrooms := language.ArrayUnique(append(m.mcChatrooms, message.FromUserName)).([]string)
+					if len(mcChatrooms) > len(m.mcChatrooms) {
+						m.mcChatrooms = mcChatrooms
+						m.sayToContact(message.FromUserName, "已设置为mc聊天室")
+						chatroom := m.chatroomMap[message.FromUserName]
+						m.broadcastStaredContact(fmt.Sprintf("已添加新的mc聊天室[%s]，当前mc聊天室数量为%d", chatroom.NickName, len(mcChatrooms)))
+					}
+				case "unset mc chatroom":
+					mcChatrooms := language.ArrayDiff(m.mcChatrooms, []string{message.FromUserName}).([]string)
+					if len(mcChatrooms) < len(m.mcChatrooms) {
+						m.mcChatrooms = mcChatrooms
+						m.sayToContact(message.FromUserName, "已从mc聊天室中移除")
+						chatroom := m.chatroomMap[message.FromUserName]
+						m.broadcastStaredContact(fmt.Sprintf("已移除mc聊天室[%s]，当前mc聊天室数量为%d", chatroom.NickName, len(mcChatrooms)))
+					}
+				default:
+					m.processMessage(message)
+				}
 			} else {
 				log.Info("new chatroom message: %s", content)
+				m.processMessage(message)
 			}
 		} else {
 			if language.ArrayIn(m.starContacts, message.FromUserName) != -1 {
@@ -166,6 +203,23 @@ func (m *WeClient) newMessageEvent(client MQTT.Client, msg MQTT.Message) {
 			} else {
 				log.Info("new message: %s", message.Content)
 			}
+		}
+	}
+}
+
+// 处理消息，检查是否为mc聊天室的消息，如果是则发送给mc
+func (m *WeClient) processMessage(message datastruct.Message) {
+	if language.ArrayIn(m.mcChatrooms, message.FromUserName) != -1 {
+		// 是mc聊天室
+		if chatroom, ok := m.chatroomMap[message.FromUserName]; ok {
+			// 找到这个聊天室联系人对象
+			memberUserName, _ := message.GetMemberUserName()
+			contact, _ := chatroom.GetMember(memberUserName)
+			content, _ := message.GetMemberMsgContent()
+			// 是mc聊天室，则将消息发送到群内
+			text := contact.NickName + ": " + content
+			log.Info("转发mc聊天室信息到Minefraft服务器: %s", text)
+			m.sayToMC(text)
 		}
 	}
 }
