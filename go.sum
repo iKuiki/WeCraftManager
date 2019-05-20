@@ -6,6 +6,7 @@ github.com/eclipse/paho.mqtt.golang v1.2.0 h1:1F8mhG9+aO5/xpdtFkW4SxOJB67ukuDC3t
 github.com/eclipse/paho.mqtt.golang v1.2.0/go.mod h1:H9keYFcgq3Qr5OUJm/JZI/i6U7joQ8SYLhZwfeOo6Ts=
 github.com/gogo/protobuf v1.2.1/go.mod h1:hp+jE20tsWTFYpLwKvXlhS1hjn+gTNwPg2I6zVXpSg4=
 github.com/golang/appengine v1.6.0/go.mod h1:xpcJRLb0r/rnEns0DIKYYv+WjYCduHsrkT7/EB5XEv4=
+github.com/golang/crypto v0.0.0-20190513172903-22d7a77e9e5f h1:8doyZ7ehohg553SQEtjvHRMp17Emd5ASyTEh1XFy7iM=
 github.com/golang/crypto v0.0.0-20190513172903-22d7a77e9e5f/go.mod h1:yigFU9vqHzYiE8UmvKecakEJjdnWj3jj499lnFckfCI=
 github.com/golang/net v0.0.0-20190514140710-3ec191127204 h1:oTK9W1yplTeMIO+TmSLk+LofTFado7mAFkhir2M5pGE=
 github.com/golang/net v0.0.0-20190514140710-3ec191127204/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
@@ -13,6 +14,7 @@ github.com/golang/protobuf v1.2.0/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5y
 github.com/golang/protobuf v1.3.1 h1:YF8+flBXS5eO826T4nzqPrxfhQThhXl0YzfuUPu4SBg=
 github.com/golang/protobuf v1.3.1/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
 github.com/golang/sync v0.0.0-20190423024810-112230192c58/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
+github.com/golang/sys v0.0.0-20190514135907-3a4b5fb9f71f h1:mkFtNNs1nF9i977OeCP1hwZuaofn9jCZIYg0DMTg77E=
 github.com/golang/sys v0.0.0-20190514135907-3a4b5fb9f71f/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 github.com/golang/text v0.3.2 h1:vDAeTQXl8YUdGoj2vMsMnzHi1xMJJ9S7iwnTBFL/pkA=
 github.com/golang/text v0.3.2/go.mod h1:bEr9sfX3Q8Zfm5fL9x+3itogRgK3+ptLWKqgva+5dAk=
@@ -25,12 +27,8 @@ github.com/ikuiki/go-component v0.0.0-20171218165758-b9f2562e71d1 h1:iEY90SGCz5O
 github.com/ikuiki/go-component v0.0.0-20171218165758-b9f2562e71d1/go.mod h1:X6JegIiKSPdHyLC41UjlnpCZ5BFFEnz7hLpLU4vO094=
 github.com/ikuiki/mqant v1.8.1-0.20190427142930-7dabfa32d064 h1:CjM+8e+AMuOejVwaJ6OYXHQDp25iWomh49mcHvrzv30=
 github.com/ikuiki/mqant v1.8.1-0.20190427142930-7dabfa32d064/go.mod h1:tF5hElwI/Pw7xSBUDlZl91Ob4OzbEKd/Sg1X5ZaiJZg=
-github.com/ikuiki/wegate v0.0.0-20190424073326-424d9e3cb842 h1:47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
-github.com/ikuiki/wegate v0.0.0-20190424073326-424d9e3cb842/go.mod h1:PwiJUjpHTVq5LyEwK5CMf+SCpUpqty6F6aSmHNEzbKM=
 github.com/ikuiki/wegate v0.0.0-20190515101143-c32a606b93bb h1:5ElctpcYQczs3QuXCgCiwmr9eBqM0Ooi0gP15Oufsa0=
 github.com/ikuiki/wegate v0.0.0-20190515101143-c32a606b93bb/go.mod h1:sjFgYSRS6oh01n/XQ2ggT1Loa+TjEDBp7xLzoF9Z8I8=
-github.com/ikuiki/wwdk v2.1.0+incompatible h1:tAdC6+pGwU2AbvTJR3wqeNz6hWi+TZHSyoc+8UteqH8=
-github.com/ikuiki/wwdk v2.1.0+incompatible/go.mod h1:3HG01QSJDWr7kHGvz2eM0sRH/rkN3WPaArGG4JB7rgg=
 github.com/ikuiki/wwdk v2.3.0+incompatible h1:7zTBo8cQpXgeErUsBSOxLDUIE8f2kdarz8feKnFxaBI=
 github.com/ikuiki/wwdk v2.3.0+incompatible/go.mod h1:oX9zFLSgz9wIXfRZwmE5hV48JQ9VP9AQJMIK+9MJhSU=
 github.com/kataras/golog v0.0.0-20180321173939-03be10146386 h1:VT6AeCHO/mc+VedKBMhoqb5eAK8B1i9F6nZl7EGlHvA=
@@ -44,8 +42,6 @@ github.com/kr/pty v1.1.1/go.mod h1:pFQYn66WHrOpPYNljwOMqo10TkYh1fy3cYio2l3bCsQ=
 github.com/kr/text v0.1.0/go.mod h1:4Jbv+DJW3UT/LiOwJeYQe1efqtUx/iVham/4vfdArNI=
 github.com/liangdas/armyant v0.0.0-20181120080818-50ccc5936868 h1:84Vsk7F5AG9kFF1VuWdmY4DR+TbmVVEhKzBnUhOJVg8=
 github.com/liangdas/armyant v0.0.0-20181120080818-50ccc5936868/go.mod h1:AgpkN9LqG5QT47ca4Efu+QZ43DBNn0TLZAMdXbVjXAc=
-github.com/liangdas/mqant v1.8.0 h1:h4mObgLJhxo/3jx+LVk3R9G+hp81nvFFUMBflFTUYFE=
-github.com/liangdas/mqant v1.8.0/go.mod h1:inl0LpqB2/OqbD73zleLHiD9lVGUDRP2jrmgUp/4g10=
 github.com/mdp/qrterminal v0.1.2/go.mod h1:JHFxKzeFy8lXGu3bkkAZ4EwpmxWtm2laIs1MVvWoBt0=
 github.com/mdp/qrterminal v1.0.1/go.mod h1:Z33WhxQe9B6CdW37HaVqcRKzP+kByF3q/qLxOGe12xQ=
 github.com/mdp/rsc v0.0.0-20160131164516-90f07065088d/go.mod h1:fIxvRMy+xQMcJGz9JAV25fJOKMRF1VQY/P8Mrni5XJA=

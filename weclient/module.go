@@ -15,6 +15,7 @@ import (
 	"github.com/liangdas/mqant/module"
 	"github.com/liangdas/mqant/module/base"
 	"github.com/pkg/errors"
+	"golang.org/x/crypto/bcrypt"
 	"time"
 	"wegate/common"
 	"wegate/common/test"
@@ -67,7 +68,11 @@ func (m *WeClient) OnInit(app module.App, settings *conf.ModuleSettings) {
 	}
 	// 登陆
 	pass := common.ForceString(settings.Settings["Password"]) + time.Now().Format(time.RFC822)
-	resp, _ := m.mqttClient.Request("Login/HD_Login", []byte(`{"username":"wecraftManager","password":"`+pass+`"}`))
+	hashedPass, err := bcrypt.GenerateFromPassword([]byte(pass), bcrypt.DefaultCost)
+	if err != nil {
+		panic(err)
+	}
+	resp, _ := m.mqttClient.Request("Login/HD_Login", []byte(`{"username":"wecraftManager","password":"`+string(hashedPass)+`"}`))
 	if resp.Ret != common.RetCodeOK {
 		panic(fmt.Sprintf("登录失败: %s", resp.Msg))
 	}

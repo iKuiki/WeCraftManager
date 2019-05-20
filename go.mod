@@ -8,6 +8,7 @@ require (
 	github.com/ikuiki/wwdk v2.3.0+incompatible
 	github.com/liangdas/mqant v1.8.1
 	github.com/pkg/errors v0.8.1
+	golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2
 	wegate v0.0.0-00010101000000-000000000000
 )
 
