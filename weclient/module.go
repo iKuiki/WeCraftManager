@@ -245,4 +245,5 @@ func (m *WeClient) Run(closeSig chan bool) {
 	log.Debug("weclient模块开始运行，")
 	// 关闭信号
 	<-closeSig
+	m.broadcastStaredContact("wecraftmanager正在停止")
 }
