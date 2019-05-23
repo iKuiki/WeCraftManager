@@ -62,6 +62,7 @@ func (m *WeClient) OnInit(app module.App, settings *conf.ModuleSettings) {
 	opts.SetOnConnectHandler(func(client MQTT.Client) {
 		log.Info("OnConnectHandler")
 	})
+	opts.SetAutoReconnect(true)
 	err := m.mqttClient.Connect(opts)
 	if err != nil {
 		panic(err)
