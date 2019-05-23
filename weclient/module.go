@@ -15,8 +15,6 @@ import (
 	"github.com/liangdas/mqant/module"
 	"github.com/liangdas/mqant/module/base"
 	"github.com/pkg/errors"
-	"golang.org/x/crypto/bcrypt"
-	"time"
 	"wegate/common"
 	"wegate/common/test"
 )
@@ -54,47 +52,18 @@ func (m *WeClient) Version() string {
 func (m *WeClient) OnInit(app module.App, settings *conf.ModuleSettings) {
 	m.BaseModule.OnInit(m, app, settings)
 	// 初始化与wegate的连接
-
-	opts := m.mqttClient.GetDefaultOptions(common.ForceString(settings.Settings["HostURL"]))
-	opts.SetConnectionLostHandler(func(client MQTT.Client, err error) {
-		log.Info("ConnectionLost: %s", err.Error())
-	})
-	opts.SetOnConnectHandler(func(client MQTT.Client) {
-		log.Info("OnConnectHandler")
-	})
-	opts.SetAutoReconnect(true)
-	err := m.mqttClient.Connect(opts)
+	err := m.prepareConn(
+		common.ForceString(settings.Settings["HostURL"]),
+		common.ForceString(settings.Settings["Password"]),
+	)
 	if err != nil {
 		panic(err)
 	}
-	// 登陆
-	pass := common.ForceString(settings.Settings["Password"]) + time.Now().Format(time.RFC822)
-	hashedPass, err := bcrypt.GenerateFromPassword([]byte(pass), bcrypt.DefaultCost)
+	token, err := m.registerConn(m.loginEvent, m.modifyContact, m.newMessageEvent)
 	if err != nil {
 		panic(err)
 	}
-	resp, _ := m.mqttClient.Request("Login/HD_Login", []byte(`{"username":"wecraftManager","password":"`+string(hashedPass)+`"}`))
-	if resp.Ret != common.RetCodeOK {
-		panic(fmt.Sprintf("登录失败: %s", resp.Msg))
-	}
-	// 注册监听新消息方法
-	m.mqttClient.On("loginEvent", m.loginEvent)
-	m.mqttClient.On("modifyContact", m.modifyContact)
-	m.mqttClient.On("newMessageEvent", m.newMessageEvent)
-	resp, _ = m.mqttClient.Request("Wechat/HD_Wechat_RegisterMQTTPlugin", []byte(fmt.Sprintf(
-		`{"name":"%s","description":"%s","loginListenerTopic":"%s","contactListenerTopic":"%s","msgListenerTopic":"%s","addPluginListenerTopic":"%s","removePluginListenerTopic":"%s"}`,
-		"WeCraftManager",  // name
-		"WeCraft插件管理模块",   // description
-		"loginEvent",      // loginListenerTopic
-		"modifyContact",   // contactListenerTopic
-		"newMessageEvent", // msgListenerTopic
-		"",                // addPluginListenerTopic
-		"",                // removePluginListenerTopic
-	)))
-	if resp.Ret != common.RetCodeOK {
-		panic(fmt.Sprintf("注册plugin失败: %s", resp.Msg))
-	}
-	m.wegateToken = resp.Msg
+	m.wegateToken = token
 	log.Info("获取到token：%s\n", m.wegateToken)
 	m.GetServer().RegisterGO("McSay", m.mcSay)
 }
