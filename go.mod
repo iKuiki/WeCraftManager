@@ -4,8 +4,10 @@ go 1.12
 
 require (
 	github.com/eclipse/paho.mqtt.golang v1.2.0
+	github.com/google/uuid v1.1.1
 	github.com/ikuiki/go-component v0.0.0-20171218165758-b9f2562e71d1
-	github.com/ikuiki/wwdk v2.3.0+incompatible
+	github.com/ikuiki/storer v1.0.0
+	github.com/ikuiki/wwdk v2.4.0+incompatible
 	github.com/liangdas/mqant v1.8.1
 	github.com/pkg/errors v0.8.1
 	golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2
@@ -23,6 +25,6 @@ replace (
 	google.golang.org/appengine => github.com/golang/appengine v1.6.0
 )
 
-replace wegate => github.com/ikuiki/wegate v0.0.0-20190515101143-c32a606b93bb
+replace wegate => github.com/ikuiki/wegate v0.0.0-20190524062417-c9acb9a2c348
 
 replace github.com/liangdas/mqant => github.com/ikuiki/mqant v1.8.1-0.20190427142930-7dabfa32d064

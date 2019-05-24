@@ -31,7 +31,8 @@
                 "ProcessID": "development",
                 "Settings": {
                     "HostURL": "tcp://127.0.0.1:3563",
-                    "Password": "hello"
+                    "Password": "hello",
+                    "SavePath": "weclient.json"
                 }
             }
         ],
