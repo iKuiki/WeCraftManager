@@ -40,7 +40,6 @@ func (m *WeClient) prepareConn(hostURL, password string) error {
 // registerConn 注册连接
 // 将本模块注册为wegate的plugin
 func (m *WeClient) registerConn(loginEvent, modifyContact, newMessageEvent func(client MQTT.Client, msg MQTT.Message)) (token string, err error) {
-
 	// 注册监听新消息方法
 	m.mqttClient.On("loginEvent", loginEvent)
 	m.mqttClient.On("modifyContact", modifyContact)
