@@ -134,6 +134,11 @@ func (mgt *MCGate) hdPlayerAdvancementDone(session gate.Session, msg map[string]
 		err = "player name or chat message missing"
 		return
 	}
-	mgt.mcSay(playerName + "达成了进度[" + advancementKey + "]")
+	advancement, ok := mgt.advancementMap[advancementKey]
+	if ok {
+		mgt.mcSay(playerName + "达成了进度[" + advancement.Advancement + "]\\n" + advancement.InGameDescription)
+	} else {
+		mgt.mcSay(playerName + "达成了进度[" + advancementKey + "]")
+	}
 	return
 }

@@ -16,6 +16,7 @@ require (
 
 // 解决国内无法下载的几个包
 replace (
+	// by mqant v1.8.1
 	golang.org/x/crypto => github.com/golang/crypto v0.0.0-20190513172903-22d7a77e9e5f
 	golang.org/x/net => github.com/golang/net v0.0.0-20190514140710-3ec191127204
 	golang.org/x/sync => github.com/golang/sync v0.0.0-20190423024810-112230192c58

@@ -13,6 +13,7 @@ import (
 func Module() module.Module {
 	mgt := new(MCGate)
 	mgt.sessionMap = make(map[string]gate.Session)
+	mgt.loadAdvancement("advancements.json")
 	return mgt
 }
 
@@ -20,6 +21,8 @@ func Module() module.Module {
 type MCGate struct {
 	basegate.Gate
 	sessionMap map[string]gate.Session // 已经连接的session map, sessionID => session
+	// advancementMap 进度表
+	advancementMap map[string]Advancement
 }
 
 // GetType 返回Type

@@ -1,0 +1,464 @@
+[
+    {
+        "Advancement": "Minecraft",
+        "InGameDescription": "游戏的核心与故事",
+        "Parent": "—",
+        "ActualRequirements": "在物品栏中获得工作台。",
+        "InternalID": "story/root"
+    },
+    {
+        "Advancement": "石器时代",
+        "InGameDescription": "用你的新镐挖掘石头",
+        "Parent": "Minecraft",
+        "ActualRequirements": "在物品栏中获得圆石。",
+        "InternalID": "story/mine_stone"
+    },
+    {
+        "Advancement": "获得升级",
+        "InGameDescription": "制作一把更好的镐",
+        "Parent": "石器时代",
+        "ActualRequirements": "在物品栏中获得石镐。",
+        "InternalID": "story/upgrade_tools"
+    },
+    {
+        "Advancement": "来硬的",
+        "InGameDescription": "冶炼出一块铁锭",
+        "Parent": "获得升级",
+        "ActualRequirements": "在物品栏中获得铁锭。",
+        "InternalID": "story/smelt_iron"
+    },
+    {
+        "Advancement": "整装上阵",
+        "InGameDescription": "用铁盔甲来保护你自己",
+        "Parent": "来硬的",
+        "ActualRequirements": "在物品栏中获得任意类型的铁盔甲。",
+        "InternalID": "story/obtain_armor"
+    },
+    {
+        "Advancement": "热腾腾的",
+        "InGameDescription": "用桶装点熔岩",
+        "Parent": "来硬的",
+        "ActualRequirements": "在物品栏中获得熔岩桶。",
+        "InternalID": "story/lava_bucket"
+    },
+    {
+        "Advancement": "这不是铁镐么",
+        "InGameDescription": "升级你的镐子",
+        "Parent": "来硬的",
+        "ActualRequirements": "在物品栏中获得铁镐。",
+        "InternalID": "story/iron_tools"
+    },
+    {
+        "Advancement": "抱歉，今天不行",
+        "InGameDescription": "用盾牌弹开一根箭",
+        "Parent": "整装上阵",
+        "ActualRequirements": "用盾牌弹开一个弹射物。",
+        "InternalID": "story/deflect_arrow"
+    },
+    {
+        "Advancement": "冰桶挑战",
+        "InGameDescription": "创造并挖掘一块黑曜石",
+        "Parent": "热腾腾的",
+        "ActualRequirements": "在物品栏中获得黑曜石。",
+        "InternalID": "story/form_obsidian"
+    },
+    {
+        "Advancement": "钻石！",
+        "InGameDescription": "获得钻石",
+        "Parent": "这不是铁镐么",
+        "ActualRequirements": "在物品栏中获得钻石。",
+        "InternalID": "story/mine_diamond"
+    },
+    {
+        "Advancement": "我们需要再深入些",
+        "InGameDescription": "建造、启动并进入一个下界传送门",
+        "Parent": "冰桶挑战",
+        "ActualRequirements": "进入下界维度。",
+        "InternalID": "story/enter_the_nether"
+    },
+    {
+        "Advancement": "用钻石包裹我",
+        "InGameDescription": "钻石盔甲能救人",
+        "Parent": "钻石！",
+        "ActualRequirements": "在物品栏中获得任意类型的钻石盔甲。",
+        "InternalID": "story/shiny_gear"
+    },
+    {
+        "Advancement": "附魔师",
+        "InGameDescription": "在附魔台里附魔一件物品",
+        "Parent": "钻石！",
+        "ActualRequirements": "—",
+        "InternalID": "story/enchant_item"
+    },
+    {
+        "Advancement": "僵尸科医生",
+        "InGameDescription": "弱化并治疗一名僵尸村民",
+        "Parent": "我们需要再深入些",
+        "ActualRequirements": "向僵尸村民扔出喷溅型虚弱药水并喂它吃一个金苹果（手持金苹果并对着僵尸村民，按下使用键）。",
+        "InternalID": "story/cure_zombie_villager"
+    },
+    {
+        "Advancement": "隔墙有眼",
+        "InGameDescription": "跟随末影之眼",
+        "Parent": "我们需要再深入些",
+        "ActualRequirements": "进入要塞。",
+        "InternalID": "story/follow_ender_eye"
+    },
+    {
+        "Advancement": "结束了？",
+        "InGameDescription": "进入末地传送门",
+        "Parent": "隔墙有眼",
+        "ActualRequirements": "进入末路之地维度。",
+        "InternalID": "story/enter_the_end"
+    },
+    {
+        "Advancement": "下界",
+        "InGameDescription": "记得带夏装。",
+        "Parent": "—",
+        "ActualRequirements": "进入下界维度。",
+        "InternalID": "nether/root"
+    },
+    {
+        "Advancement": "子空间泡泡",
+        "InGameDescription": "利用下界移动对应主世界7千米的距离",
+        "Parent": "下界",
+        "ActualRequirements": "利用下界移动对应主世界两个点至少7000个方块的水平距离。",
+        "InternalID": "nether/fast_travel"
+    },
+    {
+        "Advancement": "可怕的要塞",
+        "InGameDescription": "用你的方式进入下界要塞",
+        "Parent": "下界",
+        "ActualRequirements": "进入下界要塞。",
+        "InternalID": "nether/find_fortress"
+    },
+    {
+        "Advancement": "见鬼去吧",
+        "InGameDescription": "用一团火球干掉一只恶魂",
+        "Parent": "下界",
+        "ActualRequirements": "用恶魂火球杀死恶魂。",
+        "InternalID": "nether/return_to_sender"
+    },
+    {
+        "Advancement": "与火共舞",
+        "InGameDescription": "让烈焰人从烈焰棒中解放吧",
+        "Parent": "可怕的要塞",
+        "ActualRequirements": "在物品栏中获得烈焰棒。",
+        "InternalID": "nether/obtain_blaze_rod"
+    },
+    {
+        "Advancement": "诡异又可怕的骷髅",
+        "InGameDescription": "获得凋灵骷髅的头颅",
+        "Parent": "可怕的要塞",
+        "ActualRequirements": "在物品栏中获得凋灵骷髅头颅。",
+        "InternalID": "nether/get_wither_skull"
+    },
+    {
+        "Advancement": "不稳定的同盟",
+        "InGameDescription": "把一只恶魂从下界救出，将其安全带到主世界……然后干掉它。",
+        "Parent": "见鬼去吧",
+        "ActualRequirements": "在主世界中杀死一只恶魂。",
+        "InternalID": "nether/uneasy_alliance"
+    },
+    {
+        "Advancement": "本地的酿造厂",
+        "InGameDescription": "酿造一瓶药水",
+        "Parent": "与火共舞",
+        "ActualRequirements": "从酿造台的输出栏取得药水。将药水放入再取出也能达标。",
+        "InternalID": "nether/brew_potion"
+    },
+    {
+        "Advancement": "凋零山庄",
+        "InGameDescription": "召唤一只凋灵",
+        "Parent": "诡异又可怕的骷髅",
+        "ActualRequirements": "凋灵生成时玩家处于以凋灵为中心的100.9×100.9×103.5区域里。",
+        "InternalID": "nether/summon_wither"
+    },
+    {
+        "Advancement": "狂乱的鸡尾酒",
+        "InGameDescription": "同时拥有所有药水效果",
+        "Parent": "本地的酿造厂",
+        "ActualRequirements": "在你身上同时拥有这13种药水效果。",
+        "InternalID": "nether/all_potions"
+    },
+    {
+        "Advancement": "带信标回家",
+        "InGameDescription": "建造并放置一个信标",
+        "Parent": "凋零山庄",
+        "ActualRequirements": "当信标被激活时，处在以其为中心的20×20×14区域里。",
+        "InternalID": "nether/create_beacon"
+    },
+    {
+        "Advancement": "为什么会变成这样呢？",
+        "InGameDescription": "同时拥有所有状态效果",
+        "Parent": "狂乱的鸡尾酒",
+        "ActualRequirements": "在你身上同时拥有这27种效果。",
+        "InternalID": "nether/all_effects"
+    },
+    {
+        "Advancement": "信标工程师",
+        "InGameDescription": "让一个信标发挥最大功效",
+        "Parent": "带信标回家",
+        "ActualRequirements": "当4层信标塔的的信标方块被激活时，处在以其为中心的20×20×14区域里。",
+        "InternalID": "nether/create_full_beacon"
+    },
+    {
+        "Advancement": "末地",
+        "InGameDescription": "还是开始了？",
+        "Parent": "—",
+        "ActualRequirements": "进入末路之地维度。",
+        "InternalID": "end/root"
+    },
+    {
+        "Advancement": "解放末地",
+        "InGameDescription": "祝君好运",
+        "Parent": "末地",
+        "ActualRequirements": "杀死末影龙。",
+        "InternalID": "end/kill_dragon"
+    },
+    {
+        "Advancement": "下一世代",
+        "InGameDescription": "获得龙蛋",
+        "Parent": "解放末地",
+        "ActualRequirements": "在物品栏中获得龙蛋。",
+        "InternalID": "end/dragon_egg"
+    },
+    {
+        "Advancement": "远程折跃",
+        "InGameDescription": "逃离这个岛屿",
+        "Parent": "解放末地",
+        "ActualRequirements": "将末影珍珠扔进末地折跃门。",
+        "InternalID": "end/enter_end_gateway"
+    },
+    {
+        "Advancement": "结束了…再一次…",
+        "InGameDescription": "复活末影龙。",
+        "Parent": "解放末地",
+        "ActualRequirements": "召唤末影龙。",
+        "InternalID": "end/respawn_dragon"
+    },
+    {
+        "Advancement": "你需要来点薄荷糖",
+        "InGameDescription": "用玻璃瓶收集一些龙息。",
+        "Parent": "解放末地",
+        "ActualRequirements": "在物品栏中获得龙息。",
+        "InternalID": "end/dragon_breath"
+    },
+    {
+        "Advancement": "在游戏尽头的城市",
+        "InGameDescription": "进去吧，又能发生什么呢？",
+        "Parent": "远程折跃",
+        "ActualRequirements": "进入末地城。",
+        "InternalID": "end/find_end_city"
+    },
+    {
+        "Advancement": "天空即为极限",
+        "InGameDescription": "找到鞘翅",
+        "Parent": "在游戏尽头的城市",
+        "ActualRequirements": "在物品栏中获得鞘翅。",
+        "InternalID": "end/elytra"
+    },
+    {
+        "Advancement": "这上面的风景不错",
+        "InGameDescription": "利用潜影贝的攻击向上漂浮50个方块。",
+        "Parent": "在游戏尽头的城市",
+        "ActualRequirements": "拥有飘浮状态效果，并移动50个方块的垂直距离。",
+        "InternalID": "end/levitate"
+    },
+    {
+        "Advancement": "冒险",
+        "InGameDescription": "冒险、探索与战斗",
+        "Parent": "—",
+        "ActualRequirements": "杀死任意实体，或被任意实体杀死。",
+        "InternalID": "adventure/root"
+    },
+    {
+        "Advancement": "怪物猎人",
+        "InGameDescription": "杀死任意敌对性怪物",
+        "Parent": "冒险",
+        "ActualRequirements": "杀死这25种生物中的一种。其他生物被此进度忽略。",
+        "InternalID": "adventure/kill_a_mob"
+    },
+    {
+        "Advancement": "这交易不错！",
+        "InGameDescription": "成功与一名村民进行交易",
+        "Parent": "冒险",
+        "ActualRequirements": "—",
+        "InternalID": "adventure/trade"
+    },
+    {
+        "Advancement": "甜蜜的梦",
+        "InGameDescription": "改变你的重生点",
+        "Parent": "冒险",
+        "ActualRequirements": "成功在床上睡觉，可以是睡到黎明，或者在多人游戏中睡觉5秒以上。",
+        "InternalID": "adventure/sleep_in_bed"
+    },
+    {
+        "Advancement": "抖包袱",
+        "InGameDescription": "往什么东西扔出三叉戟。注：别把你唯一的武器也抖掉了。",
+        "Parent": "怪物猎人",
+        "ActualRequirements": "—",
+        "InternalID": "adventure/throw_trident"
+    },
+    {
+        "Advancement": "瞄准目标",
+        "InGameDescription": "用弓箭射点什么",
+        "Parent": "怪物猎人",
+        "ActualRequirements": "拉弓，让箭射到实体上。",
+        "InternalID": "adventure/shoot_arrow"
+    },
+    {
+        "Advancement": "怪物狩猎完成",
+        "InGameDescription": "杀死每一种敌对性怪物。",
+        "Parent": "怪物猎人",
+        "ActualRequirements": "杀死这25种生物。其他生物被此进度忽略。",
+        "InternalID": "adventure/kill_all_mobs"
+    },
+    {
+        "Advancement": "超越生死",
+        "InGameDescription": "利用不死图腾逃离死神",
+        "Parent": "怪物猎人",
+        "ActualRequirements": "—",
+        "InternalID": "adventure/totem_of_undying"
+    },
+    {
+        "Advancement": "招募援兵",
+        "InGameDescription": "召唤一只铁傀儡来帮忙守卫村庄",
+        "Parent": "这交易不错！",
+        "ActualRequirements": "生成一只铁傀儡。",
+        "InternalID": "adventure/summon_iron_golem"
+    },
+    {
+        "Advancement": "探索的时光",
+        "InGameDescription": "发现所有的生物群系",
+        "Parent": "甜蜜的梦",
+        "ActualRequirements": "到访这42个生物群系。其他生物群系会被此进度忽略。",
+        "InternalID": "adventure/adventuring_time"
+    },
+    {
+        "Advancement": "不战而栗",
+        "InGameDescription": "雷击一名村民",
+        "Parent": "抖包袱",
+        "ActualRequirements": "用带有引雷附魔的三叉戟产生的雷电击中村民。",
+        "InternalID": "adventure/very_very_frightening"
+    },
+    {
+        "Advancement": "狙击手间的对决",
+        "InGameDescription": "从50米外干掉一只骷髅",
+        "Parent": "瞄准目标",
+        "ActualRequirements": "在水平距离50米外使用弓或三叉戟射杀一只骷髅。",
+        "InternalID": "adventure/sniper_duel"
+    },
+    {
+        "Advancement": "扣下悬刀",
+        "InGameDescription": "用弩进行一次射击",
+        "Parent": "冒险",
+        "ActualRequirements": "用弩射出一支箭或一支烟花火箭",
+        "InternalID": "adventure/ol_besty"
+    },
+    {
+        "Advancement": "现在谁才是掠夺者？",
+        "InGameDescription": "让掠夺者也尝尝弩的滋味",
+        "Parent": "扣下悬刀",
+        "ActualRequirements": "用弩射掠夺者",
+        "InternalID": "adventure/whos_the_pillager_now"
+    },
+    {
+        "Advancement": "一箭双雕",
+        "InGameDescription": "用一支穿透箭射杀两只幻翼",
+        "Parent": "扣下悬刀",
+        "ActualRequirements": "用带有贯穿附魔的弩和一支箭杀死两个幻翼",
+        "InternalID": "adventure/two_birds_one_arrow"
+    },
+    {
+        "Advancement": "劲弩手",
+        "InGameDescription": "用弩一发击杀五个不同的怪物",
+        "Parent": "扣下悬刀",
+        "ActualRequirements": "使用带穿透IV的弩一箭射杀5种不同的怪物。",
+        "InternalID": "adventure/arbalistic"
+    },
+    {
+        "Advancement": "自我放逐",
+        "InGameDescription": "杀死一名袭击队长。也许考虑在接下来一段时间内远离村庄……",
+        "Parent": "冒险",
+        "ActualRequirements": "—",
+        "InternalID": "adventure/voluntary_exile"
+    },
+    {
+        "Advancement": "村庄英雄",
+        "InGameDescription": "成功在一场袭击中保卫村庄。",
+        "Parent": "自我放逐",
+        "ActualRequirements": "—",
+        "InternalID": "adventure/hero_of_the_village"
+    },
+    {
+        "Advancement": "农牧业",
+        "InGameDescription": "世界无处没有朋友与美食",
+        "Parent": "—",
+        "ActualRequirements": "吃一种能被吃下的东西。",
+        "InternalID": "husbandry/root"
+    },
+    {
+        "Advancement": "我从哪儿来？",
+        "InGameDescription": "繁殖一对动物",
+        "Parent": "农牧业",
+        "ActualRequirements": "使这12种生物中的一种进行繁殖。其他生物被此进度忽略。",
+        "InternalID": "husbandry/breed_an_animal"
+    },
+    {
+        "Advancement": "永恒的伙伴",
+        "InGameDescription": "驯服一只动物",
+        "Parent": "农牧业",
+        "ActualRequirements": "驯服这5种生物中的一只生物。",
+        "InternalID": "husbandry/tame_an_animal"
+    },
+    {
+        "Advancement": "开荒垦地",
+        "InGameDescription": "种下种子，见证它的成长",
+        "Parent": "农牧业",
+        "ActualRequirements": "种植这5种植物中的一种。其他植物被此进度忽略。",
+        "InternalID": "husbandry/plant_seed"
+    },
+    {
+        "Advancement": "腥味十足的生意",
+        "InGameDescription": "钓到一条鱼",
+        "Parent": "农牧业",
+        "ActualRequirements": "用钓鱼竿钓上一条鱼。",
+        "InternalID": "husbandry/fishy_business"
+    },
+    {
+        "Advancement": "成双成对",
+        "InGameDescription": "繁殖每种动物！",
+        "Parent": "我从哪儿来？",
+        "ActualRequirements": "使这14种生物中的每一种进行繁殖。其他生物被此进度忽略。",
+        "InternalID": "husbandry/bred_all_animals"
+    },
+    {
+        "Advancement": "百猫全书",
+        "InGameDescription": "驯服所有种类的猫！",
+        "Parent": "永恒的伙伴",
+        "ActualRequirements": "—",
+        "InternalID": "husbandry/complete_catalogue"
+    },
+    {
+        "Advancement": "均衡饮食",
+        "InGameDescription": "尝遍天下食材，即便是对身体不好的",
+        "Parent": "开荒垦地",
+        "ActualRequirements": "吃下这36种食物中的每一种。其他食物被此进度忽略。",
+        "InternalID": "husbandry/balanced_diet"
+    },
+    {
+        "Advancement": "终极奉献",
+        "InGameDescription": "用坏一把钻石锄，然后重新考虑你的人生抉择",
+        "Parent": "开荒垦地",
+        "ActualRequirements": "用光钻石锄的所有耐久，使其损毁。",
+        "InternalID": "husbandry/break_diamond_hoe"
+    },
+    {
+        "Advancement": "战术性钓鱼",
+        "InGameDescription": "不用钓鱼竿抓住一条鱼！",
+        "Parent": "腥味十足的生意",
+        "ActualRequirements": "对着鱼使用水桶，获得鱼桶。",
+        "InternalID": "husbandry/tactical_fishing"
+    }
+]
