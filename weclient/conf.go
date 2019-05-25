@@ -53,7 +53,10 @@ func (c *config) Save() error {
 }
 
 func (c *config) Close() error {
-	return c.storer.Close()
+	if c.storer != nil {
+		return c.storer.Close()
+	}
+	return nil
 }
 
 // 将config重设为初始
