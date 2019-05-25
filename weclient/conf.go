@@ -2,6 +2,7 @@ package weclient
 
 import (
 	"encoding/json"
+
 	"github.com/ikuiki/storer"
 	"github.com/pkg/errors"
 )
@@ -20,7 +21,7 @@ type config struct {
 
 var (
 	// ErrStorerNotExist 存储器未找到
-	ErrStorerNotExist error = errors.New("storer not exist")
+	ErrStorerNotExist = errors.New("storer not exist")
 )
 
 func (c *config) Load() error {
