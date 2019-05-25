@@ -40,10 +40,12 @@ func (mgt *MCGate) OnInit(app module.App, settings *conf.ModuleSettings) {
 	mgt.Gate.OnInit(mgt, app, settings)
 	mgt.Gate.SetSessionLearner(mgt)
 	mgt.GetServer().RegisterGO("HD_Say", mgt.hdSay)
+	mgt.GetServer().RegisterGO("HD_Register", mgt.hdRegister)
 	mgt.GetServer().RegisterGO("HD_PlayerJoin", mgt.hdPlayerJoin)
 	mgt.GetServer().RegisterGO("HD_PlayerLeave", mgt.hdPlayerLeave)
 	mgt.GetServer().RegisterGO("HD_PlayerDeath", mgt.hdPlayerDeath)
 	mgt.GetServer().RegisterGO("HD_PlayerChat", mgt.hdPlayerChat)
+	mgt.GetServer().RegisterGO("HD_PlayerAdvancementDone", mgt.hdPlayerAdvancementDone)
 	mgt.GetServer().RegisterGO("BroadcastToMC", mgt.broadcastToMC)
 }
 

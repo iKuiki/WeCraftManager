@@ -37,7 +37,8 @@ func (mgt *MCGate) hdRegister(session gate.Session, msg map[string]interface{}) 
 		err = "client name missing"
 		return
 	}
-	session.SetUserId(clientName)
+	mgt.mcSay("[" + clientName + "] plugin is online")
+	session.Bind(clientName)
 	return
 }
 
@@ -114,5 +115,25 @@ func (mgt *MCGate) hdPlayerChat(session gate.Session, msg map[string]interface{}
 		return
 	}
 	mgt.mcSay(playerName + ": " + chatMessage)
+	return
+}
+
+// hdPlayerAdvancementDone 玩家达成进度
+// @Param playerName 玩家的名字
+// @Param advancementKey 进度关键字
+// @Return result none
+// @Return err 错误消息，为空则无错误
+func (mgt *MCGate) hdPlayerAdvancementDone(session gate.Session, msg map[string]interface{}) (result, err string) {
+	if session.IsGuest() {
+		err = "need login"
+		return
+	}
+	playerName := common.ForceString(msg["playerName"])
+	advancementKey := common.ForceString(msg["advancementKey"])
+	if playerName == "" || advancementKey == "" {
+		err = "player name or chat message missing"
+		return
+	}
+	mgt.mcSay(playerName + "达成了进度[" + advancementKey + "]")
 	return
 }
