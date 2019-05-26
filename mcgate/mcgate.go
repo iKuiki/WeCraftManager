@@ -23,6 +23,9 @@ func (mgt *MCGate) hdSay(session gate.Session, msg map[string]interface{}) (resu
 	if user != "" {
 		text = user + ": " + text
 	}
+	if !session.IsGuest() {
+		text = "[" + session.GetUserId() + "]" + text
+	}
 	mgt.mcSay(text)
 	return
 }
@@ -56,7 +59,7 @@ func (mgt *MCGate) hdPlayerJoin(session gate.Session, msg map[string]interface{}
 		err = "player name missing"
 		return
 	}
-	mgt.mcSay(playerName + "加入了游戏")
+	mgt.mcSay("[" + session.GetUserId() + "]" + playerName + "加入了游戏")
 	return
 }
 
@@ -74,7 +77,7 @@ func (mgt *MCGate) hdPlayerLeave(session gate.Session, msg map[string]interface{
 		err = "player name missing"
 		return
 	}
-	mgt.mcSay(playerName + "离开了游戏")
+	mgt.mcSay("[" + session.GetUserId() + "]" + playerName + "离开了游戏")
 	return
 }
 
@@ -94,7 +97,7 @@ func (mgt *MCGate) hdPlayerDeath(session gate.Session, msg map[string]interface{
 		err = "player name or death message missing"
 		return
 	}
-	mgt.mcSay(deathMessage)
+	mgt.mcSay("[" + session.GetUserId() + "]" + deathMessage)
 	return
 }
 
@@ -114,7 +117,7 @@ func (mgt *MCGate) hdPlayerChat(session gate.Session, msg map[string]interface{}
 		err = "player name or chat message missing"
 		return
 	}
-	mgt.mcSay(playerName + ": " + chatMessage)
+	mgt.mcSay("[" + session.GetUserId() + "]" + playerName + ": " + chatMessage)
 	return
 }
 
@@ -136,9 +139,9 @@ func (mgt *MCGate) hdPlayerAdvancementDone(session gate.Session, msg map[string]
 	}
 	advancement, ok := mgt.advancementMap[advancementKey]
 	if ok {
-		mgt.mcSay(playerName + "达成了进度[" + advancement.Advancement + "]\\n" + advancement.InGameDescription)
+		mgt.mcSay("[" + session.GetUserId() + "]" + playerName + "达成了进度[" + advancement.Advancement + "]\\n" + advancement.InGameDescription)
 	} else {
-		mgt.mcSay(playerName + "达成了进度[" + advancementKey + "]")
+		mgt.mcSay("[" + session.GetUserId() + "]" + playerName + "达成了进度[" + advancementKey + "]")
 	}
 	return
 }
