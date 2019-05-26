@@ -13,7 +13,6 @@ import (
 func Module() module.Module {
 	mgt := new(MCGate)
 	mgt.sessionMap = make(map[string]gate.Session)
-	mgt.loadAdvancement("advancements.json")
 	return mgt
 }
 
@@ -42,6 +41,9 @@ func (mgt *MCGate) OnInit(app module.App, settings *conf.ModuleSettings) {
 	//注意这里一定要用 gate.Gate 而不是 module.BaseModule
 	mgt.Gate.OnInit(mgt, app, settings)
 	mgt.Gate.SetSessionLearner(mgt)
+	// 加载成就列表
+	mgt.loadAdvancement("advancements.json")
+	// 注册方法
 	mgt.GetServer().RegisterGO("HD_Say", mgt.hdSay)
 	mgt.GetServer().RegisterGO("HD_Register", mgt.hdRegister)
 	mgt.GetServer().RegisterGO("HD_PlayerJoin", mgt.hdPlayerJoin)

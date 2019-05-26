@@ -51,6 +51,7 @@ func (mgt *MCGate) hdRegister(session gate.Session, msg map[string]interface{}) 
 // @Return err 错误消息，为空则无错误
 func (mgt *MCGate) hdPlayerJoin(session gate.Session, msg map[string]interface{}) (result, err string) {
 	if session.IsGuest() {
+		session.Send("WeCraft/NeedLogin", []byte{})
 		err = "need login"
 		return
 	}
@@ -69,6 +70,7 @@ func (mgt *MCGate) hdPlayerJoin(session gate.Session, msg map[string]interface{}
 // @Return err 错误消息，为空则无错误
 func (mgt *MCGate) hdPlayerLeave(session gate.Session, msg map[string]interface{}) (result, err string) {
 	if session.IsGuest() {
+		session.Send("WeCraft/NeedLogin", []byte{})
 		err = "need login"
 		return
 	}
@@ -88,6 +90,7 @@ func (mgt *MCGate) hdPlayerLeave(session gate.Session, msg map[string]interface{
 // @Return err 错误消息，为空则无错误
 func (mgt *MCGate) hdPlayerDeath(session gate.Session, msg map[string]interface{}) (result, err string) {
 	if session.IsGuest() {
+		session.Send("WeCraft/NeedLogin", []byte{})
 		err = "need login"
 		return
 	}
@@ -108,6 +111,7 @@ func (mgt *MCGate) hdPlayerDeath(session gate.Session, msg map[string]interface{
 // @Return err 错误消息，为空则无错误
 func (mgt *MCGate) hdPlayerChat(session gate.Session, msg map[string]interface{}) (result, err string) {
 	if session.IsGuest() {
+		session.Send("WeCraft/NeedLogin", []byte{})
 		err = "need login"
 		return
 	}
@@ -128,6 +132,7 @@ func (mgt *MCGate) hdPlayerChat(session gate.Session, msg map[string]interface{}
 // @Return err 错误消息，为空则无错误
 func (mgt *MCGate) hdPlayerAdvancementDone(session gate.Session, msg map[string]interface{}) (result, err string) {
 	if session.IsGuest() {
+		session.Send("WeCraft/NeedLogin", []byte{})
 		err = "need login"
 		return
 	}
