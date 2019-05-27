@@ -55,16 +55,13 @@ func (m *WeClient) OnInit(app module.App, settings *conf.ModuleSettings) {
 	err := m.prepareConn(
 		common.ForceString(settings.Settings["HostURL"]),
 		common.ForceString(settings.Settings["Password"]),
+		m.loginEvent,
+		m.modifyContact,
+		m.newMessageEvent,
 	)
 	if err != nil {
 		panic(err)
 	}
-	token, err := m.registerConn(m.loginEvent, m.modifyContact, m.newMessageEvent)
-	if err != nil {
-		panic(err)
-	}
-	m.wegateToken = token
-	log.Info("获取到token：%s\n", m.wegateToken)
 	m.GetServer().RegisterGO("McSay", m.mcSay)
 }
 

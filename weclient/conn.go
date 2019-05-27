@@ -11,19 +11,33 @@ import (
 )
 
 // prepareConn 准备连接（包括连接的认证等
-func (m *WeClient) prepareConn(hostURL, password string) error {
+func (m *WeClient) prepareConn(hostURL, password string, loginEvent, modifyContact, newMessageEvent func(client MQTT.Client, msg MQTT.Message)) error {
 	opts := m.mqttClient.GetDefaultOptions(hostURL)
 	opts.SetConnectionLostHandler(func(client MQTT.Client, err error) {
 		log.Info("ConnectionLost: %s", err.Error())
 	})
 	opts.SetOnConnectHandler(func(client MQTT.Client) {
 		log.Info("OnConnectHandler")
+		err := m.loginConn(password)
+		if err != nil {
+			panic(err)
+		}
+		token, err := m.registerConn(loginEvent, modifyContact, newMessageEvent)
+		if err != nil {
+			panic(err)
+		}
+		m.wegateToken = token
+		log.Info("获取到token：%s\n", m.wegateToken)
 	})
 	opts.SetAutoReconnect(true)
 	err := errors.WithStack(m.mqttClient.Connect(opts))
 	if err != nil {
 		return err
 	}
+	return nil
+}
+
+func (m *WeClient) loginConn(password string) (err error) {
 	// 登陆
 	pass := password + time.Now().Format(time.RFC822)
 	hashedPass, err := bcrypt.GenerateFromPassword([]byte(pass), bcrypt.DefaultCost)
@@ -32,7 +46,7 @@ func (m *WeClient) prepareConn(hostURL, password string) error {
 	}
 	resp, _ := m.mqttClient.Request("Login/HD_Login", []byte(`{"username":"wecraftManager","password":"`+string(hashedPass)+`"}`))
 	if resp.Ret != common.RetCodeOK {
-		errors.Errorf("登录失败: %s", resp.Msg)
+		return errors.Errorf("登录失败: %s", resp.Msg)
 	}
 	return nil
 }
