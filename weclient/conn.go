@@ -15,6 +15,8 @@ func (m *WeClient) prepareConn(hostURL, password string, loginEvent, modifyConta
 	opts := m.mqttClient.GetDefaultOptions(hostURL)
 	opts.SetConnectionLostHandler(func(client MQTT.Client, err error) {
 		log.Info("ConnectionLost: %s", err.Error())
+		// 连接不可用，锁定连接锁
+		m.connLock.Lock()
 	})
 	opts.SetOnConnectHandler(func(client MQTT.Client) {
 		log.Info("OnConnectHandler")
@@ -28,8 +30,12 @@ func (m *WeClient) prepareConn(hostURL, password string, loginEvent, modifyConta
 		}
 		m.wegateToken = token
 		log.Info("获取到token：%s\n", m.wegateToken)
+		// 连接完成，则释放连接锁
+		m.connLock.Unlock()
 	})
 	opts.SetAutoReconnect(true)
+	// 先锁定连接状态
+	m.connLock.Lock()
 	err := errors.WithStack(m.mqttClient.Connect(opts))
 	if err != nil {
 		return err
