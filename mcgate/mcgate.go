@@ -150,3 +150,16 @@ func (mgt *MCGate) hdPlayerAdvancementDone(session gate.Session, msg map[string]
 	}
 	return
 }
+
+// hdPing 为了防止失去登录态的心跳接口
+// 无需参数
+// @Return result none
+// @Return err 错误消息，为空则无错误
+func (mgt *MCGate) hdPing(session gate.Session, msg map[string]interface{}) (result, err string) {
+	if session.IsGuest() {
+		session.Send("WeCraft/NeedLogin", []byte{})
+		err = "need login"
+		return
+	}
+	return
+}

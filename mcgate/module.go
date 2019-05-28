@@ -46,6 +46,7 @@ func (mgt *MCGate) OnInit(app module.App, settings *conf.ModuleSettings) {
 	// 注册方法
 	mgt.GetServer().RegisterGO("HD_Say", mgt.hdSay)
 	mgt.GetServer().RegisterGO("HD_Register", mgt.hdRegister)
+	mgt.GetServer().RegisterGO("HD_Ping", mgt.hdPing)
 	mgt.GetServer().RegisterGO("HD_PlayerJoin", mgt.hdPlayerJoin)
 	mgt.GetServer().RegisterGO("HD_PlayerLeave", mgt.hdPlayerLeave)
 	mgt.GetServer().RegisterGO("HD_PlayerDeath", mgt.hdPlayerDeath)
