@@ -9,12 +9,6 @@ import (
 	"wegate/common"
 )
 
-// mcSay minecraft中发的文字
-func (m *WeClient) mcSay(text string) (result, err string) {
-	m.broadcastMCChatroom(text)
-	return
-}
-
 // 向mc中发消息
 func (m *WeClient) sayToMC(text string) error {
 	m.RpcInvokeNR("MCGate", "BroadcastToMC", text)
@@ -22,6 +16,10 @@ func (m *WeClient) sayToMC(text string) error {
 }
 
 func (m *WeClient) sayToContact(contactUserName, text string) error {
+	m.callerLock.Lock()
+	defer m.callerLock.Unlock()
+	m.connLock.RLock()
+	defer m.connLock.RUnlock()
 	resp, _ := m.mqttClient.Request("Wechat/HD_Wechat_CallWechat", []byte(fmt.Sprintf(
 		`{"fnName":"%s","token":"%s","toUserName":"%s","content":"%s"}`,
 		"SendTextMessage", // fnName
@@ -37,6 +35,10 @@ func (m *WeClient) sayToContact(contactUserName, text string) error {
 
 // 获取当前登陆用户
 func (m *WeClient) getUser() (user datastruct.User, err error) {
+	m.callerLock.Lock()
+	defer m.callerLock.Unlock()
+	m.connLock.RLock()
+	defer m.connLock.RUnlock()
 	resp, _ := m.mqttClient.Request("Wechat/HD_Wechat_CallWechat", []byte(`{"fnName":"GetUser","token":"`+m.wegateToken+`"}`))
 	if resp.Ret != common.RetCodeOK {
 		err = errors.Errorf("GetUser失败: %s", resp.Msg)
@@ -48,6 +50,10 @@ func (m *WeClient) getUser() (user datastruct.User, err error) {
 
 // 获取联系人
 func (m *WeClient) getContacts() (contacts []datastruct.Contact, err error) {
+	m.callerLock.Lock()
+	defer m.callerLock.Unlock()
+	m.connLock.RLock()
+	defer m.connLock.RUnlock()
 	resp, _ := m.mqttClient.Request("Wechat/HD_Wechat_CallWechat", []byte(`{"fnName":"GetContactList","token":"`+m.wegateToken+`"}`))
 	if resp.Ret != common.RetCodeOK {
 		err = errors.Errorf("GetContactList失败: %s", resp.Msg)

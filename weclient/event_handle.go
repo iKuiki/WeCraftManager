@@ -18,7 +18,7 @@ func (m *WeClient) loginEvent(client MQTT.Client, msg MQTT.Message) {
 		log.Error("loginEvent: json.Unmarshal(msg.Payload(),&loginStatus) error: %v", e)
 		return
 	}
-	if loginStatus.Code == wwdk.LoginStatusGotBatchContact {
+	if loginStatus.Code == wwdk.LoginStatusBatchGotContact {
 		log.Info("检测到登陆成功")
 		// 载入配置，检查配置是否适用（依据登陆用户是否为当前获取到的登陆用户的userName
 		m.conf.Load()

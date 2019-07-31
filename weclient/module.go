@@ -10,6 +10,7 @@ import (
 	"github.com/liangdas/mqant/log"
 	"github.com/liangdas/mqant/module"
 	"github.com/liangdas/mqant/module/base"
+	"sync"
 	"wegate/common"
 	"wegate/common/test"
 )
@@ -30,6 +31,8 @@ type WeClient struct {
 	starContacts []string
 	chatroomMap  map[string]datastruct.Contact // 群列表（需要维护
 	mcChatrooms  []string                      // 属于mc的群
+	callerLock   sync.Mutex                    // 调用wegate的互斥锁，避免同时产生太多调用导致timeout，让调用排队来
+	connLock     sync.RWMutex                  // 连接是否准备好的读写锁
 }
 
 // GetType 获取模块类型
@@ -55,17 +58,15 @@ func (m *WeClient) OnInit(app module.App, settings *conf.ModuleSettings) {
 	err := m.prepareConn(
 		common.ForceString(settings.Settings["HostURL"]),
 		common.ForceString(settings.Settings["Password"]),
+		m.loginEvent,
+		m.modifyContact,
+		m.newMessageEvent,
 	)
 	if err != nil {
 		panic(err)
 	}
-	token, err := m.registerConn(m.loginEvent, m.modifyContact, m.newMessageEvent)
-	if err != nil {
-		panic(err)
-	}
-	m.wegateToken = token
-	log.Info("获取到token：%s\n", m.wegateToken)
 	m.GetServer().RegisterGO("McSay", m.mcSay)
+	m.GetServer().RegisterGO("McBroadcast", m.mcBroadcast)
 }
 
 // Run 运行主函数

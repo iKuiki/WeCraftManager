@@ -4,7 +4,7 @@ package mcgate
 import (
 	"github.com/liangdas/mqant/conf"
 	"github.com/liangdas/mqant/gate"
-	"github.com/liangdas/mqant/gate/base"
+	basegate "github.com/liangdas/mqant/gate/base"
 	"github.com/liangdas/mqant/log"
 	"github.com/liangdas/mqant/module"
 )
@@ -20,6 +20,8 @@ func Module() module.Module {
 type MCGate struct {
 	basegate.Gate
 	sessionMap map[string]gate.Session // 已经连接的session map, sessionID => session
+	// advancementMap 进度表
+	advancementMap map[string]Advancement
 }
 
 // GetType 返回Type
@@ -39,7 +41,17 @@ func (mgt *MCGate) OnInit(app module.App, settings *conf.ModuleSettings) {
 	//注意这里一定要用 gate.Gate 而不是 module.BaseModule
 	mgt.Gate.OnInit(mgt, app, settings)
 	mgt.Gate.SetSessionLearner(mgt)
+	// 加载成就列表
+	mgt.loadAdvancement("advancements.json")
+	// 注册方法
 	mgt.GetServer().RegisterGO("HD_Say", mgt.hdSay)
+	mgt.GetServer().RegisterGO("HD_Register", mgt.hdRegister)
+	mgt.GetServer().RegisterGO("HD_Ping", mgt.hdPing)
+	mgt.GetServer().RegisterGO("HD_PlayerJoin", mgt.hdPlayerJoin)
+	mgt.GetServer().RegisterGO("HD_PlayerLeave", mgt.hdPlayerLeave)
+	mgt.GetServer().RegisterGO("HD_PlayerDeath", mgt.hdPlayerDeath)
+	mgt.GetServer().RegisterGO("HD_PlayerChat", mgt.hdPlayerChat)
+	mgt.GetServer().RegisterGO("HD_PlayerAdvancementDone", mgt.hdPlayerAdvancementDone)
 	mgt.GetServer().RegisterGO("BroadcastToMC", mgt.broadcastToMC)
 }
 
